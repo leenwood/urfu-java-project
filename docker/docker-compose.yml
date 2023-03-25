@@ -10,4 +10,4 @@ services:
     environment:
       - POSTGRES_USER=${PG_USER}
       - POSTGRES_PASSWORD=${PG_PASSWORD}
-      - POSTGRES_DATABASE=${PG_DATABASE}
+      - POSTGRES_DB=${PG_DATABASE}
