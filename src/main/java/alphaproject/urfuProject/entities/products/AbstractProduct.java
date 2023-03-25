@@ -18,7 +18,7 @@ public abstract class AbstractProduct {
     @Column()
     private String originalUrl;
 
-    @Column(nullable = false)
+    @JoinColumn(nullable = false)
     @ManyToOne()
     private Category category;
 
