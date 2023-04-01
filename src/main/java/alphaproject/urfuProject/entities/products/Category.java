@@ -1,4 +1,4 @@
-package alphaproject.urfuProject.enteties.products;
+package alphaproject.urfuProject.entities.products;
 
 import jakarta.persistence.*;
 

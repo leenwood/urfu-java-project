@@ -1,9 +1,9 @@
-package alphaproject.urfuProject.enteties.products;
+package alphaproject.urfuProject.entities.products;
 
 import jakarta.persistence.*;
 
 @Entity
-public class Product {
+public abstract class AbstractProduct {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -18,7 +18,7 @@ public class Product {
     @Column()
     private String originalUrl;
 
-    @Column(nullable = false)
+    @JoinColumn(nullable = false)
     @ManyToOne()
     private Category category;
 
