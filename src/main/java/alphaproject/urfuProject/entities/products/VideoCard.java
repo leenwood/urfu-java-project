@@ -1,34 +1,35 @@
 package alphaproject.urfuProject.entities.products;
 
 import alphaproject.urfuProject.entities.products.videocardSpecs.*;
-import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.ManyToOne;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.lang.NonNull;
 
 @Getter
 @Setter
+@Entity
 public class VideoCard extends AbstractProduct {
-    @Column
+    @ManyToOne
     private VideoRam videoRam;
 
-    @Column
     private int busWidth;
 
-    @Column
+    @ManyToOne
     private VideoMemoryType videoMemoryType;
 
-    @Column
+    @ManyToOne
     private ChipManufacturer chipManufacturer;
 
-    @Column
+    @ManyToOne
     private VideoVendor videoVendor;
 
-    @Column
-    private GPU GPU;
+    @ManyToOne
+    private GPU gpu;
 
-    @Column
+    @ManyToOne
     private ConnectionInterface connectionInterface;
 
-    @Column
     private int fanNumber;
 }
