@@ -28,6 +28,12 @@ public class VideoCardService {
         return res.toString();
     }
 
+    public List<VideoCard> getTenVideoCards() {
+        return videoCardRepository.findAll().subList(10, (1)* 10L > videoCardRepository.count()
+                                                                    ? (int)videoCardRepository.count()
+                                                                    : (+1)*10);
+    }
+
     public List<VideoCard> getByName(String name) {
         // Предобработка..
         return videoCardRepository.findVideoCardsByName(name);
