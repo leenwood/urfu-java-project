@@ -1,8 +1,10 @@
 package alphaproject.urfuProject.entities.products;
 
 import jakarta.persistence.*;
+import lombok.ToString;
 
 @Entity
+@ToString
 public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
