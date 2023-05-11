@@ -4,6 +4,7 @@ import alphaproject.urfuProject.Security.Role;
 import alphaproject.urfuProject.Services.SessionsService.Session;
 import alphaproject.urfuProject.Services.SessionsService.SessionsService;
 import alphaproject.urfuProject.Services.VideoCardService;
+import alphaproject.urfuProject.entities.products.VideoCard;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
@@ -76,12 +77,12 @@ public class TelegramBot extends TelegramLongPollingBot {
                 var keyboard = createFullKeyboard(sendMessage);
 
 
-                sendMessage.setChatId(requestMessage.getChatId().toString());
+                sendMessage.setChatId(session.getSessionId());
                 sendMessage.setText("Для начала работы выберите раздел");
             } else if (requestMessage.getText().equals("Информация о боте")) {
                 var keyboard = createButtonBack(sendMessage);
 
-                sendMessage.setChatId(requestMessage.getChatId().toString());
+                sendMessage.setChatId(session.getSessionId());
                 sendMessage.setText("Добро пожаловать в нашего бота по подбору видеокарт! Наш бот создан с целью помочь вам выбрать наиболее подходящую видеокарту для ваших потребностей.\n" +
                         "\n" +
                         "Наши разработчики уверены в том, что каждый покупатель заслуживает наилучшего опыта покупки, и поэтому мы разработали этого бота, чтобы сделать выбор более легким и простым.\n" +
@@ -91,23 +92,37 @@ public class TelegramBot extends TelegramLongPollingBot {
                         "Благодаря нашему боту, выбор вашей новой видеокарты становится более легким и приятным процессом. Безопасность ваших данных всегда на нашем первом месте, поэтому мы гарантируем, что ваши данные всегда находятся в безопасности.\n" +
                         "\n" +
                         "Наш бот доступен на разных языках, что делает его еще более удобным для использования. Мы уверены, что наш бот поможет вам выбрать лучшую видеокарту и сделать каждую покупку более удачной! Добро пожаловать!\n" +
-                        "```Номер вашего чата: " + requestMessage.getChatId().toString() + " " + session.getName() + "``` ");
+                        "```Номер вашего чата: " + session.getSessionId() + " " + session.getName() + "``` ");
 
             } else if (requestMessage.getText().equals("Топ самых актуальных")) {
                 var keyboard = createButtonBack(sendMessage);
-                sendMessage.setChatId(requestMessage.getChatId().toString());
+                sendMessage.setChatId(session.getSessionId());
                 sendMessage.setText(videoCardService.getAllVideoCardsString());
             } else if (requestMessage.getText().equals("Удалить переписку")) {
-                var keyboard = createButtonBack(sendMessage);
-                sendMessage.setChatId(requestMessage.getChatId().toString());
-                sendMessage.setText("Скоро добавим такую функцию");
+                this.sessionsService.deleteSession(session);
+                sendMessage.setChatId(session.getSessionId());
+                sendMessage.setText("Будем ждать вас снова!");
             } else if (requestMessage.getText().equals("Найти видеокарту")) {
                 var keyboard = createButtonBack(sendMessage);
-                sendMessage.setChatId(requestMessage.getChatId().toString());
+                sendMessage.setChatId(session.getSessionId());
                 sendMessage.setText("Просто введите название видеокарты");
             } else
             {
+                //TODO поиск видеокарты по названию.
 
+                try {
+                    var videoCards = this.videoCardService.getByName(requestMessage.getText());
+                    String response = "";
+                    for (VideoCard videoCard: videoCards) {
+                        response = response + videoCard.toString();
+                    }
+                } catch (Throwable exception){
+                    log.warn(exception.toString(), exception);
+                    String response = "not found (";
+                }
+
+                sendMessage.setChatId(session.getSessionId());
+                sendMessage.setText("Просто введите название видеокарты");
             }
             execute(sendMessage);
         } catch (

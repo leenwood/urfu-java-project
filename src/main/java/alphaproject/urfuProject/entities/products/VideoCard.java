@@ -34,4 +34,10 @@ public class VideoCard extends AbstractProduct {
     private ConnectionInterface connectionInterface;
 
     private int fanNumber;
+
+
+    @Override
+    public String toString() {
+        return this.getName() + ": " + this.getPrice() + "\n";
+    }
 }
