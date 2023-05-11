@@ -1,21 +1,21 @@
 package alphaproject.urfuProject;
 
-import alphaproject.urfuProject.Security.Account;
-import alphaproject.urfuProject.Security.Role;
-import alphaproject.urfuProject.Services.UserService;
-import org.springframework.boot.CommandLineRunner;
+import alphaproject.urfuProject.Services.VideoCardService;
+import alphaproject.urfuProject.bot.TelegramBot;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-
-import java.util.HashSet;
-import java.util.Set;
+import org.telegram.telegrambots.meta.TelegramBotsApi;
+import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
+import org.telegram.telegrambots.updatesreceivers.DefaultBotSession;
 
 @SpringBootApplication
 public class UrfuProjectApplication {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws TelegramApiException {
 		SpringApplication.run(UrfuProjectApplication.class, args);
 	}
 

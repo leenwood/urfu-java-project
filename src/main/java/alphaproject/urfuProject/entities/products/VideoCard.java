@@ -5,11 +5,13 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToOne;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 import org.springframework.lang.NonNull;
 
 @Getter
 @Setter
 @Entity
+@ToString
 public class VideoCard extends AbstractProduct {
     @ManyToOne
     private VideoRam videoRam;

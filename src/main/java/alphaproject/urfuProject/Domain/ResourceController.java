@@ -1,6 +1,6 @@
 package alphaproject.urfuProject.Domain;
 
-import alphaproject.urfuProject.Repositories.VideoCardRepository;
+import alphaproject.urfuProject.Services.VideoCardService;
 import alphaproject.urfuProject.entities.products.VideoCard;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
@@ -13,7 +13,8 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 public class ResourceController {
-    private final VideoCardRepository videoCardRepository;
+    private final VideoCardService videoCardService;
+
     @GetMapping("/login")
     public String loginEndpoint() {
         return "Login!";
@@ -22,11 +23,18 @@ public class ResourceController {
     @GetMapping("/hello")
     public String helloEndpoint() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        return "Hello "+auth.getName()+"!" +
-                " Your role is "+auth.getAuthorities();
+        return "Hello " + auth.getName() + "!" +
+                " Your role is " + auth.getAuthorities();
     }
+
     @GetMapping("/gpu")
-    public List<VideoCard> getAllGPU(){
-        return videoCardRepository.findAll();
+    public List<VideoCard> getAllGPU() {
+        return videoCardService.getAllVideoCards();
     }
+
+    @GetMapping("/gpu2")
+    public String getAllGPUs() {
+        return videoCardService.getAllVideoCardsString();
+    }
+
 }
