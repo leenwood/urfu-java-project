@@ -1,5 +1,16 @@
 package alphaproject.urfuProject.Services.DTO;
 
-public class VideoCardResponse {
+import lombok.Data;
 
+@Data
+public class VideoCardResponse {
+    int id;
+    String name;
+    int price;
+    String currency;
+    String videoMemory;
+    String typeVideoMemory;
+    String chipVendor;
+    String busWidth;
+    String vendor;
 }
