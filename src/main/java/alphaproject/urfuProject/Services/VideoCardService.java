@@ -3,6 +3,8 @@ package alphaproject.urfuProject.Services;
 import alphaproject.urfuProject.Repositories.VideoCardRepository;
 import alphaproject.urfuProject.entities.products.VideoCard;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -37,6 +39,10 @@ public class VideoCardService {
     public List<VideoCard> getByName(String name) {
         // Предобработка..
         return videoCardRepository.findVideoCardsByName(name);
+    }
+
+    public Page<VideoCard> getPage(int start, int end) {
+        return videoCardRepository.findAll(PageRequest.of(start,end));
     }
 
     public List<VideoCard> getById(Long id) {

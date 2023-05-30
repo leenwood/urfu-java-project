@@ -6,7 +6,6 @@ import jakarta.persistence.ManyToOne;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-import org.springframework.lang.NonNull;
 
 @Getter
 @Setter
@@ -40,4 +39,15 @@ public class VideoCard extends AbstractProduct {
     public String toString() {
         return this.getName() + ": " + this.getPrice() + "\n";
     }
+/*
+    public VideoCard(DAOVideoCard daoVideoCard) {
+        videoRam=;
+        busWidth=;
+        videoMemoryType=;
+        chipManufacturer=;
+        videoVendor=;
+        gpu=;
+        connectionInterface=;
+        fanNumber=;
+    }*/
 }
